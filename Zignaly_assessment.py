@@ -20,6 +20,7 @@ def analyze_transactions(csv_path, account_name, cutoff_timestamp, upload_to_she
 
     # Determine transaction effect
     def calculate_effect(row):
+        #easiest part of the assessment used for summation of final balance
         if row['to'] == account_name:   # income
             return row['amount']
         elif row['from'] == account_name:  # expenditure
@@ -162,7 +163,7 @@ def plot_running_balance(df, account_name, cutoff):
     ax.annotate(
         f"{last_balance:,.2f}", 
         (last_ts, last_balance),
-        xytext=(35, 70), textcoords="offset points",  # shift label slightly
+        xytext=(35, 70), textcoords="offset points",  # shift label slightly to where i feel it stands out
         fontsize=25, color=color, fontweight="bold",
         arrowprops=dict(arrowstyle="->", color="gray")
     )
@@ -175,7 +176,7 @@ def plot_running_balance(df, account_name, cutoff):
     print("✅ Running balance chart saved as running_balance_chart.png")
 if __name__ == "__main__":
     analyze_transactions(
-        csv_path="zigenv/mock_transactions.csv",
+        csv_path="mock_transactions.csv",
         account_name="ZignalyX120",
         cutoff_timestamp="2025-01-30 08:42:00",
         upload_to_sheets=False 
